@@ -7,7 +7,6 @@
 - AWS Fundamentals
     - [IAM: Identity Access & Management](1-aws-fundamentals/iam.md)
     - [EC2: Virtual Machines](1-aws-fundamentals/ec2.md)
-    - [Security Groups](1-aws-fundamentals/security-groups.md)
     - [ELB: Elastic Load Balancers](1-aws-fundamentals/elb.md)
     - [ASG: Auto Scaling Group](1-aws-fundamentals/asg.md)
     - [EBS Volumes](1-aws-fundamentals/ebs.md)
