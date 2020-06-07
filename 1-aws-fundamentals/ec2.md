@@ -48,6 +48,21 @@ They regulate:
 * Control of inbound network
 * Control of outbound network
 
+4.Differences between IPV4 and IPV6
+-  Public IP:
+	- Public IP means the machine can be identified on the internet (WWW)
+	- Must be unique across the whole web (not two machines can have the same public IP). • Can be geo-located easily
+-  Private IP:
+	- Private IP means the machine can only be identified on a private network only
+	- The IP must be unique across the private network
+	- BUT two different private networks (two companies) can have the same IPs.
+	- Machines connect to WWW using a NAT + internet gateway (a proxy)
+	- Only a specified range of IPs can be used as private IP
+	
+When we are doing SSH into our EC2 machines:
+-  We can’t use a private IP, because we are not in the same network 
+-  We can only use the public IP.
+
 ## EC2 User Data
 * It is possible to bootstrap our instances using an EC2 User data script
 * Bootstrapping means launching commands when a machine starts
