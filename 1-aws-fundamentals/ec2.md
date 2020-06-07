@@ -1,5 +1,6 @@
 # EC2: Virtual Machines
 
+- [EC2 Basic](#ec2-basic)
 - [EC2 User Data](#ec2-user-data)
 - [EC2 Meta Data](#ec2-meta-data)
 - [EC2 Instance Launch Types](#ec2-instance-launch-types)
@@ -13,9 +14,38 @@ By default, your EC2 machine comes with:
 
 When you SSH into your EC2 machine:
 * We can’t use a private IP, because we are not in the same network
-* We can only use the public IP
+*** We can only use the public IP**
 
 If your machine is stopped and then restarted, the public IP will change
+
+## EC2 Basic
+1. EC2 mainly consists in the capability of :
+• Renting virtual machines (EC2)
+• Storing data on virtual drives (EBS)
+• Distributing load across machines (ELB)
+• Scaling the services using an auto-scaling group (ASG)
+
+2. Launching an EC2 Instance running Linux:
+```bash
+chomd 0400 yourkey.pem
+ssh -i yourkey.pem ec2-user@your isntance IP
+```
+3. Security Groups
+• Can be attached to multiple instances
+• Locked down to a region / VPC combination
+• Does live “outside” the EC2 – if traffic is blocked the EC2 instance won’t see it
+• It’s good to maintain one separate security group for SSH access
+• If your application is not accessible (time out), then it’s a security group issue
+• If your application gives a “connection refused“ error, then it’s an application error or it’s not launched
+• All inbound traffic is **blocked **by default
+• All outbound traffic is** authorised** by default
+
+**Security groups act as a firewall on EC2 Instances**
+They regulate:
+* Access to ports
+* Authorized IP ranges - IPv4 and IPv6
+* Control of inbound network
+* Control of outbound network
 
 ## EC2 User Data
 * It is possible to bootstrap our instances using an EC2 User data script
