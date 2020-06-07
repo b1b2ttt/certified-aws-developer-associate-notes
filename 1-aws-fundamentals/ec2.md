@@ -20,10 +20,11 @@ If your machine is stopped and then restarted, the public IP will change
 
 ## EC2 Basic
 1. EC2 mainly consists in the capability of :
-• Renting virtual machines (EC2)
-• Storing data on virtual drives (EBS)
-• Distributing load across machines (ELB)
-• Scaling the services using an auto-scaling group (ASG)
+- Renting virtual machines (EC2)
+- Storing data on virtual drives (EBS)
+- Distributing load across machines (ELB)
+- Scaling the services using an auto-scaling group (ASG)
+
 
 2. Launching an EC2 Instance running Linux:
 ```bash
@@ -31,14 +32,14 @@ chomd 0400 yourkey.pem
 ssh -i yourkey.pem ec2-user@your isntance IP
 ```
 3. Security Groups
-• Can be attached to multiple instances
-• Locked down to a region / VPC combination
-• Does live “outside” the EC2 – if traffic is blocked the EC2 instance won’t see it
-• It’s good to maintain one separate security group for SSH access
-• If your application is not accessible (time out), then it’s a security group issue
-• If your application gives a “connection refused“ error, then it’s an application error or it’s not launched
-• All inbound traffic is **blocked **by default
-• All outbound traffic is** authorised** by default
+-  Can be attached to multiple instances
+-  Locked down to a region / VPC combination
+-  Does live “outside” the EC2 – if traffic is blocked the EC2 instance won’t see it
+-  It’s good to maintain one separate security group for SSH access
+-  If your application is not accessible (time out), then it’s a security group issue
+-  If your application gives a “connection refused“ error, then it’s an application error or it’s not launched
+-  All inbound traffic is **blocked** by default
+-  All outbound traffic is **authorised** by default
 
 **Security groups act as a firewall on EC2 Instances**
 They regulate:
