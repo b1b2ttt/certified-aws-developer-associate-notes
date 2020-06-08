@@ -189,7 +189,8 @@ When we are doing SSH into our EC2 machines:
 - R/C/P/G/H/X/I/F/Z/CR are specialised in RAM, CPU, I/O, Network, GPU 
 - M instance types are balanced 
 - T2/T3 instance types are “burstable”
-Burstable Instances (T2)
+
+## Burstable Instances (T2)
 - AWS has the concept of burstable instances (T2 machines) 
 - Burst means that overall, the instance has OK CPU performance. 
 - When the machine needs to process something unexpected (a spike in load for example), it can burst, and CPU can be VERY good. 
@@ -203,3 +204,14 @@ Burstable Instances (T2)
 - Nov 2017: It is possible to have an “unlimited burst credit balance
 - You pay extra money if you go over your credit balance, but you don’t lose in performance
 - Overall, it is a new offering, so be careful, costs could go high if you’re not monitoring the health of your instances 
+
+### Elastic Network Interfaces (ENI)
+1. Logical component in a VPC that represents a virtual network card
+2. The ENI can have the following attributes:
+- 	Primary private IPv4, one or more secondary IPv4 
+- 	One Elastic IP (IPv4) per private IPv4
+- 	 One Public IPv4
+- 	One or more security groups
+- 	A MAC address
+3. You can create ENI independently and attach them on the fly (move them) on EC2 instances for failover
+4. Bound to a specific availability zone (AZ)
