@@ -1,5 +1,17 @@
 # ELB: Elastic Load Balancers
 
+#### High Availability and Scalability For EC2
+- Vertical Scaling: Increase instance size (= scale up / down) 
+	- From: t2.nano - 0.5G of RAM, 1 vCPU
+	- To: u-12tb1.metal – 12.3 TB of RAM, 448 vCPUs
+- Horizontal Scaling: Increase number of instances (= scale out / in) 
+	- Auto Scaling Group
+	- Load Balancer
+- High Availability: Run instances for the same application across multi AZ
+	- Auto Scaling Group multi AZ
+	- Load Balancer multi AZ
+
+#### What is load balancing?
 Load balancers are servers that forward internet traffic to multiple servers (EC2 Instances) downstream
 
 #### Why use a load balancer?
@@ -31,6 +43,16 @@ It costs less to setup your own load balancer but it will be a lot more effort o
 * The health check is done on a port and a route (/health is common)
 * If the response is not 200 (OK), then the instance is unhealthy
 
+#### Classic Load Balancers(v1)
+- Supports TCP (Layer 4), HTTP & HTTPS (Layer 7)
+- Health checks are TCP or HTTP based
+- Fixed hostname XXX.region.elb.amazonaws.com
+
+work flow:
+	 	 listener		 internal
+    
+client --------->CLB----------->EC2
+
 #### Application Load Balancer (v2)
 * Application load balancers (Layer 7) allow to do:
   * Load balancing to multiple HTTP applications across machines (target groups)
@@ -48,14 +70,29 @@ It costs less to setup your own load balancer but it will be a lot more effort o
     * The application servers don’t see the IP of the client directly
         * The true IP of the client is inserted in the header X-Forwarded-For
         * We can also get Port (X-Forwarded-Port) and protocol (X-Forwarded-Proto)
+		
 #### Network Load Balancer (v2)
 * Layer 4 allow you to do:
     * Forward TCP traffic to your instances
     * Handle millions of requests per second
     * Support for static IP or elastic IP
     * Less latency ~100ms (vs 400 ms for ALB)
+* NLB has ** one static IP ** per AZ, and supports assigning Elastic IP (helpful for whitelisting specific IP)
 * Network Load Balancers are mostly used for extreme performance and should not be the default load balancer you choose
 * Overall, the creation process is the same as the Application Load Balancer
+
+#### Cross-Zone Load Balancing
+-  With Cross Zone Load Balancing: each load balancer instance distributes evenly across all registered instances in all AZ
+-  Otherwise, each load balancer node distributes requests evenly across the registered instances in its Availability Zone only.
+- Classic Load Balancer
+	- Disabled by default
+	- No charges for inter AZ data if enabled
+- Application Load Balancer
+	- Always on (can’t be disabled) 
+	- No charges for inter AZ data
+- Network Load Balancer
+	- Disabled by default
+	- You pay charges ($) for inter AZ data if enabled
 
 #### Load Balancers Good to Know
 * Any Load Balancer (CLB, ALB, NLB) has a static host name. They do not resolve and use underlying IP
@@ -65,3 +102,7 @@ It costs less to setup your own load balancer but it will be a lot more effort o
 * 5xx errors are application induced errors
     * Load balancer Errors 503 means at capacity or no registered target
 * If the LB can’t connect to your application, check your security
+- Monitoring
+	-  ELB access logs will log all access requests (so you can debug per request)
+	-  CloudWatch Metrics will give you aggregate statistics (ex: connections count)
+
