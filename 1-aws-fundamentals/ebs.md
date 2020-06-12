@@ -25,9 +25,9 @@
 - SC1 (HDD): Lowest cost HDD volume designed for less frequently accessed workloads 
 - EBS Volumes are characterized in Size | Throughput | IOPS
 - When in doubt always consult the AWS documentation
-- Only GP2 and IO1 can be used as boot volumes
+-  Only GP2 and IO1 can be used as boot volumes
 
-#### EBS Volume Types Use cases
+#### EBS Volume Types Use Cases
 1. GP2
 - Recommended for most workloads 
 - System boot volumes
@@ -37,20 +37,20 @@
 
 2. IO1
 - Critical business applications that require sustained IOPS performance, or more than 16,000 IOPS per volume (gp2 limit)
-- Large database workloads, such as: MongoDB, Cassandra, Microsoft SQL Server, MySQL, PostgreSQL, Oracle
+-  Large database workloads, such as: MongoDB, Cassandra, Microsoft SQL Server, MySQL, PostgreSQL, Oracle
 
-3.ST1
+3. ST1
 - Streaming workloads requiring consistent, fast throughput at a low price. 
 - Big data, Data warehouses, Log processing
 - Apache Kafka
-- Cannot be a boot volume
-
-4.SC1
+ - Cannot be a boot volume
+ 
+4. SC1
 - Throughput-oriented storage for large volumes of data that is infrequently accessed
 - Scenarios where the lowest storage cost is important
 - Cannot be a boot volume
 
-#### EBS –VolumeTypes Summary
+#### EBS Volume Types Summary
 - gp2: General Purpose Volumes (cheap)
 - io1: Provisioned IOPS (expensive)
 - st1: Throughput Optimized HDD
@@ -93,6 +93,14 @@ EBS Snapshots
     * You can’t resize the instance store
     * Backups must be operated by the user
 * Overall, EBS-backed instances should fit most applications workloads
+
+#### Local EC2 Instance Store
+- Physical disk attached to the physical server where your EC2 is
+- Very High IOPS (because physical)
+- Disks up to 7.5 TiB (can change over time), stripped to reach 30 TiB (can change over time...)
+- Block Storage (just like EBS)
+- Cannot be increased in size
+- Risk of data loss if hardware fails
 
 #### EB Deployment Modes
 - Single Instance mode: Great for development environment
@@ -178,9 +186,34 @@ What if you want to update each deployment
 * In some cases, it's better to externalize your RDS database so that it won't get deleted when you delete your elastic beanstalk enviornment
 * Elastic Beanstalk relies on CloudFormation
 
-#### EBS Volume Types - Use cases 
+#### EFS- Elastic File System
+- Managed NFS (network file system) that can be mounted on many EC2 
+- EFS works with EC2 instances in multi-AZ
+- Highly available, scalable, expensive (3x gp2), pay per use
+- Use cases: content management, web serving, data sharing,Wordpress
+- Uses security group to control access to EFS
+- Compatible with Linux based AMI (not Windows)
+- Encryption at rest using KMS
+- POSIX file system (~Linux) that has a standard file API
+- File system scales automatically, pay-per-use, no capacity planning!
 
-* Big Data / Data Warehouses / Log Processing : ST1 (HDD)
-* Lowest storage cost : SC1 (HDD)
-* NoSQL such as MongoDB, Cassandra or MSQL : IO1 (SSD)
-* Low latency applications : GP2 (SSD) 
+#### EFS – Performance & Storage Classes
+- EFS Scale: Grow to Petabyte-scale network file system, automatically
+- Performance mode (set at EFS creation time)
+	- General purpose (default): latency-sensitive use cases (web server, CMS, etc...) 
+	- Max I/O – higher latency, throughput, highly parallel (big data, media processing)
+- StorageTiers (lifecycle management feature – move file after N days)
+	- Standard: for frequently accessed files
+	- Infrequent access (EFS-IA): cost to retrieve files, lower price to store
+	
+#### EBS vs EFS – Elastic Block Storage
+- EBS volumes
+	- can be attached to only one instance at a time
+	- are locked at the Availability Zone (AZ) level 
+	- gp2: IO increases if the disk size increases
+	- io1: can increase IO independently
+- To migrate an EBS volume across AZ
+	- Take a snapshot
+	- Restore the snapshot to another AZ
+	- EBS backups use IO and you shouldn’t run them while your application is handling a lot of traffic
+- Root EBS Volumes of instances get terminated by default if the EC2 instance gets terminated. 
