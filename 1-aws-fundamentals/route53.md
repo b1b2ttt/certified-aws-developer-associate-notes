@@ -19,4 +19,29 @@ Route53 has advanced features such as:
 * Health checks (although limited…)
 * Routing policy: simple, failover, geolocation, geoproximity, latency, weighted
 
+CNAME vs Alias
+- AWS Resources (Load Balancer, CloudFront...) expose an AWS hostname:
+- lb1-1234.us-east-2.elb.amazonaws.com and you want myapp.mydomain.com
+- CNAME:
+	- Points a hostname to any other hostname. (app.mydomain.com => blabla.anything.com) 
+	- ONLY FOR NON ROOT DOMAIN (aka. something.mydomain.com)
+- Alias:
+	- Points a hostname to an AWS Resource (app.mydomain.com => blabla.amazonaws.com)
+	- Works for ROOT DOMAIN and NON ROOT DOMAIN (aka mydomain.com)
+	- Free of charge
+	- Native health check
+
+
 Prefer Alias over CNAME for AWS resources (for performance reasons)
+
+Routing Policy
+- Simple Routing Policy: Maps a hostname to another hostname
+- Weighted Routing Policy: Control the % of the requests that go to specific endpoint
+- Latency Routing Policy: Redirect to the server that has the least latency close to us
+- Failover Routing Policy
+- Geo Location Routing Policy: This is routing based on user location
+- Multi Value Routing Policy:
+	- Use when routing traffic to multiple resources
+	- Want to associate a Route 53 health checks with records
+	- Up to 8 healthy records are returned for each MultiValue query 
+	- Multi Value is not a substitute for having an ELB
