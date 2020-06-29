@@ -28,7 +28,7 @@ If your machine is stopped and then restarted, the public IP will change
 
 2. Launching an EC2 Instance running Linux:
 ```bash
-chomd 0400 yourkey.pem
+chmod 0400 yourkey.pem
 ssh -i yourkey.pem ec2-user@your isntance IP
 ```
 3. Security Groups
