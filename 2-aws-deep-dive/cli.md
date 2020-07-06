@@ -13,6 +13,7 @@ If you are using multiple AWS accounts, you can add custom profiles with seperat
 * IAM roles can be attached to EC2 instances
 * IAM roles can come with a policy authorizing exactly what the EC2 instance should be able to do. This is the best practice.
 * EC2 Instances can then use these profiles automatically without any additional configurations
+ 
 
 #### CLI STS Decode Errors
 - When you run API calls and they fail, you can get a long, encoded error message code 
