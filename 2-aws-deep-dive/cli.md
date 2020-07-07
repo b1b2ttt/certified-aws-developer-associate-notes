@@ -46,10 +46,10 @@ If you are using multiple AWS accounts, you can add custom profiles with seperat
 3. CLI credentials file –aws configure
 ~/.aws/credentials on Linux / Mac & C:\Users\user\.aws\credentials on Windows
 
-4.CLI configuration file – aws configure
+4. CLI configuration file – aws configure
 ~/.aws/config on Linux / macOS & C:\Users\USERNAME\.aws\config on Windows
 
-5.Container credentials – for ECS tasks
+5. Container credentials – for ECS tasks
 
-6.Instance profile credentials – for EC2 Instance Profiles
+6. Instance profile credentials – for EC2 Instance Profiles
 
