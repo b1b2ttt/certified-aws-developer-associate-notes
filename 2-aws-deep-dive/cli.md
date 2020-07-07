@@ -40,10 +40,14 @@ If you are using multiple AWS accounts, you can add custom profiles with seperat
 #### AWS CLI Credenyisld Provider Chain
 1. Command line options – --region, --output, and --profile
 2. Environment variables – AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_SESSION_TOKEN
+
 3. CLI credentials file –aws configure
 ~/.aws/credentials on Linux / Mac & C:\Users\user\.aws\credentials on Windows
+
 4.CLI configuration file – aws configure
 ~/.aws/config on Linux / macOS & C:\Users\USERNAME\.aws\config on Windows
+
 5.Container credentials – for ECS tasks
+
 6.Instance profile credentials – for EC2 Instance Profiles
 
