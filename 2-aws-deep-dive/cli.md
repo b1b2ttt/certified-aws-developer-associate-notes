@@ -38,7 +38,9 @@ If you are using multiple AWS accounts, you can add custom profiles with seperat
 - then configure a new profile `aws configure --profile mfa`
 
 #### AWS CLI Credenyisld Provider Chain
+
 1. Command line options – --region, --output, and --profile
+
 2. Environment variables – AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_SESSION_TOKEN
 
 3. CLI credentials file –aws configure
