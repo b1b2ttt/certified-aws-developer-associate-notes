@@ -53,3 +53,17 @@ If you are using multiple AWS accounts, you can add custom profiles with seperat
 
 6. Instance profile credentials – for EC2 Instance Profiles
 
+#### AWS SDK Default Credentials Provider Chain
+The Java SDK (example) will look for credentials in this order
+
+1. Environment variables –
+AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+
+2. Java system properties – aws.accessKeyId and aws.secretKey
+
+3. The default credential profiles file – ex at: ~/.aws/credentials, shared by many SDK
+
+4. Amazon ECS container credentials – for ECS containers
+
+5. Instance profile credentials– used on EC2 instances
+
